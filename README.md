@@ -1,10 +1,10 @@
-# tiling
+# Tiling
 
 The problem my friend suggested to me was the following: 
 Suppose you have a rectangle of dimensions (m x n), where m and n are both integers. How many ways are there to break this rectangle into smaller "tiles", all of which are rectangles of the integer dimensions?
 Note that for the purpose of this problem, reflections and rotations of the same tiling are not considered to be distinct.
 
-## usage
+## Usage
 
 The 1xn files are used to calculate the number of tilings for a (1 x n) rectangle. 
 
