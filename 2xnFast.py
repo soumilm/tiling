@@ -88,7 +88,10 @@ class Tiles:
         temp = convertFromBit(self.top) * convertFromBit(self.mid) * convertFromBit(self.bottom)
         return temp % 2**(3*n)
     def __hash__(self):
-        return self.hashHelp() + self.flipV().hashHelp() + self.flipH().hashHelp() + self.flipV().flipH().hashHelp()
+        if self.rotate:
+            return self.hashHelp() + self.flipV().hashHelp() + self.flipH().hashHelp() + self.flipV().flipH().hashHelp()
+        else:
+            return self.hashHelp()
 
 def convertToBit(n, len):
     arr = [0] * len;
@@ -124,6 +127,14 @@ if (len(sys.argv) > 1):
 else:
     n = int(input("n = "))
 
-total = findAll(n, False)
+display = False
+if (len(sys.argv) > 2):
+    display = bool(sys.argv[2])
+
+rot = True
+if (len(sys.argv) > 3):
+    rot = bool(sys.argv[3])
+
+total = findAll(n, display, rot)
 print("Total tilings: ", end="")
 print(total)
