@@ -1,23 +1,32 @@
 import sys
 
+def strToBool(str):
+    if str.lower() == "false":
+        return False
+    if str.lower() == "true":
+        return True
+    return bool(str)
+
+# helper functions to dipsplay tilings
 def displayH(bit):
     if (bit == 1):
         print("_", end="")
     else:
         print(" ", end="")
-
 def displayV(bit):
     if (bit == 1):
         print("|", end="")
     else:
         print(" ", end="")
 
+# helper for hash function
 def convertFromBit(arr):
     binary = 0
     for i in arr:
         binary = 2 * binary + i
     return binary
 
+# define class for configuration
 class Tiles:
     def __init__(self, top, mid, bottom, rotate=True):
         self.top = top
@@ -93,6 +102,7 @@ class Tiles:
         else:
             return self.hashHelp()
 
+# helper function for interator below
 def convertToBit(n, len):
     arr = [0] * len;
     for i in range(len):
@@ -101,7 +111,8 @@ def convertToBit(n, len):
         n = (n - r)//2
     return arr
 
-def findAll(n, bool, rotate=True):
+# iterator function to find all tilings
+def findAll(n, bool, rotate):
     print("Total configurations to check", end=": ")
     print(2**(3*n - 2))
     all = set()
@@ -129,11 +140,12 @@ else:
 
 display = False
 if (len(sys.argv) > 2):
-    display = bool(sys.argv[2])
+    display = strToBool(sys.argv[2])
 
 rot = True
 if (len(sys.argv) > 3):
-    rot = bool(sys.argv[3])
+    rot = strToBool(sys.argv[3])
+
 
 total = findAll(n, display, rot)
 print("Total tilings: ", end="")
