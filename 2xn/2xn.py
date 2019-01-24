@@ -1,4 +1,15 @@
 import sys
+import json
+
+n = 0
+if (len(sys.argv) > 1):
+    n = int(sys.argv[1])
+else:
+    n = int(input("n = "))
+
+config = json.load(open('default.json'))
+if (len(sys.argv) > 2):
+    config = json.load(open(sys.argv[2]))
 
 def strToBool(str):
     if str.lower() == "false":
@@ -28,11 +39,10 @@ def convertFromBit(arr):
 
 # define class for configuration
 class Tiles:
-    def __init__(self, top, mid, bottom, rotate=True):
+    def __init__(self, top, mid, bottom):
         self.top = top
         self.mid = mid
         self.bottom = bottom
-        self.rotate = rotate
         self.n = len(mid)
 
     def display(self):
@@ -84,7 +94,7 @@ class Tiles:
     def __eq__(self, another):
         if self.equal(another):
             return True
-        if self.rotate:
+        if config['rotate']:
             if self.flipH().equal(another):
                 return True
             if self.flipV().equal(another):
@@ -97,7 +107,7 @@ class Tiles:
         temp = convertFromBit(self.top) * convertFromBit(self.mid) * convertFromBit(self.bottom)
         return temp % 2**(3*n)
     def __hash__(self):
-        if self.rotate:
+        if config['rotate']:
             return self.hashHelp() + self.flipV().hashHelp() + self.flipH().hashHelp() + self.flipV().flipH().hashHelp()
         else:
             return self.hashHelp()
@@ -112,7 +122,7 @@ def convertToBit(n, len):
     return arr
 
 # iterator function to find all tilings
-def findAll(n, bool, rotate):
+def findAll(n):
     print("Total configurations to check", end=": ")
     print(2**(3*n - 2))
     all = set()
@@ -123,30 +133,15 @@ def findAll(n, bool, rotate):
                 counter += 1
                 if (counter%(10**5) == 0 and not bool):
                     print("\rConfigurations checked so far: " + str(counter), end="")
-                tile = Tiles(convertToBit(i, n-1), convertToBit(j, n), convertToBit(k,n-1), rotate)
+                tile = Tiles(convertToBit(i, n-1), convertToBit(j, n), convertToBit(k,n-1))
                 if (tile.checkRectangular() and tile not in all):
                     all.add(tile)
-                    if (bool):
+                    if (config['display']):
                         tile.display()
     if not bool and 2**(3*n-2) > 10**5:
         print()
     return len(all)
 
-n = 0
-if (len(sys.argv) > 1):
-    n = int(sys.argv[1])
-else:
-    n = int(input("n = "))
-
-display = False
-if (len(sys.argv) > 2):
-    display = strToBool(sys.argv[2])
-
-rot = True
-if (len(sys.argv) > 3):
-    rot = strToBool(sys.argv[3])
-
-
-total = findAll(n, display, rot)
+total = findAll(n)
 print("Total tilings: ", end="")
 print(total)
