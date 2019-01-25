@@ -1,6 +1,16 @@
 import sys
 import json
 
+def buildDict(default, custom):
+    typeDict = type({})
+    for key, value in custom.items():
+        if type(value) == typeDict:
+            default[key] = buildDict(default[key], value)
+        else:
+            default[key] = value
+    return default
+
+
 n = 0
 if (len(sys.argv) > 1):
     n = int(sys.argv[1])
@@ -9,7 +19,7 @@ else:
 
 config = json.load(open('default.json'))
 if (len(sys.argv) > 2):
-    config = json.load(open(sys.argv[2]))
+    config = buildDict(config, json.load(open(sys.argv[2])))        
 
 def strToBool(str):
     if str.lower() == "false":
@@ -102,6 +112,28 @@ class Tiles:
             if self.flipH().flipV().equal(another):
                 return True
         return False
+
+    def isHSymmetric(self):
+        return self.flipH().equal(self)
+    def isVSymmetric(self):
+        return self.flipV().equal(self)
+    def isRSymmetric(self):
+        return self.flipV().flipH().equal(self)
+    def isSymmetric(self):
+        return self.isHSymmetric() or self.isVSymmetric() or self.isRSymmetric()
+    def isAsymmetric(self):
+        return not self.isSymmetric()
+
+    def isValid(self):
+        if (config["selectiveCounting"]["leftRightSymmetric"] and self.isHSymmetric()):
+            return True
+        if (config["selectiveCounting"]["topBottomSymmetric"] and self.isVSymmetric()):
+            return True
+        if (config["selectiveCounting"]["rotationallySymmetric"] and self.isRSymmetric()):
+            return True
+        if (config["selectiveCounting"]["asymmetric"] and self.isAsymmetric()):
+            return True
+        return False
     
     def hashHelp(self):
         temp = convertFromBit(self.top) * convertFromBit(self.mid) * convertFromBit(self.bottom)
@@ -134,7 +166,7 @@ def findAll(n):
                 if (counter%(10**5) == 0 and not bool):
                     print("\rConfigurations checked so far: " + str(counter), end="")
                 tile = Tiles(convertToBit(i, n-1), convertToBit(j, n), convertToBit(k,n-1))
-                if (tile.checkRectangular() and tile not in all):
+                if (tile.checkRectangular() and tile.isValid() and tile not in all):
                     all.add(tile)
                     if (config['display']):
                         tile.display()
