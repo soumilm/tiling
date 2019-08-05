@@ -21,19 +21,19 @@ Alternatively, running just `$ python3 1xn.py` will prompt you to enter an n, an
 #### 1xnVisual.py
 `1xnVisual.py` prints out all the tilings of rectangles of length (1 x n), for any inputted n. There are two ways to do this:
 
+The following way will print all tilings of rectangles of length (1 x n), for whatever integer n you input via command-line arguments.
 ```
 $ python3 1xnVisual.py n
 ```
-will print all tilings of rectangles of length (1 x n), for whatever integer n you input, where n is some number. 
 
+On the other hand, omitting the command-line argument will make python prompt you for your value of `n`.
 ```
 $ python3 1xnVisual.py
 ```
-will prompt you to enter an n, and then print all tilings for that n.
 
 ### 2xn Files
 #### 2xn.py
-This file is extremely diverse, in theory. It will print out the total number of possible tilings for a (2 x n) grid. It also prints out the total number of configurations it is brute forcing when it starts, and gives periodic updates every 100,000 configurations, when there are that many.
+This file is extremely diverse, in theory. It will print out the total number of possible tilings for a (2 x n) grid. It also prints out the total number of configurations it is brute forcing when it starts, and gives periodic updates every 100,000 configurations, when the total number of configurations exceeds that number.
 
 The file takes up to 2 command line arguments:
 
@@ -50,7 +50,7 @@ There are a few attributes you can set. Your configuration file need not define 
   * `leftRightSymmetric` (type: `bool`; default: `true`): Setting this to `true` will include all configurations that are symmetric upon reflecting along the central vertical axis (aka y-axis). Setting this to `false` will exclude all such configurations.
   * `topBottomSymmetric` (type: `bool`; default: `true`): Setting this to `true` will include all configurations that are symmetric upon reflecting along the central horizontal axis (aka x-axis). Setting this to `false` will exclude all such configurations.
   * `rotationallySymmetric` (type: `bool`; default: `true`): Setting this to `true` will include all configurations that are symmetric upon a 180-degree rotation. Setting this to `false` will exclude all such configurations.
-  * `asymmetric` (type: `bool`; default: `true`): Setting this to `true` will include all configurations that are not symmetric by any of the above three definitions. Setting this to `false` will excludue all such configurations.
+  * `asymmetric` (type: `bool`; default: `true`): Setting this to `true` will include all configurations that are not symmetric by any of the above three definitions. Setting this to `false` will exclude all such configurations.
 
 #### 2xnFormulae.py
 This file is to be used exactly like to `1xn.py` (either via command line arguments, or by being promptes), and inputting any n will output the number of possible tiling configurations for a (2 x n) grid. This is currently counts the total number of tilings, counting reflections and rotations of the same tiling as distinct. As we flesh out the mathematical approach to it, we will be able to make these formulae account for rotations and reflections, and hopefully answer some subproblems (for example: the number of symmetric tilings of a (2 x n) board).
