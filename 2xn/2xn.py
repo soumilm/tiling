@@ -19,7 +19,7 @@ else:
 
 config = json.load(open('default.json'))
 if (len(sys.argv) > 2):
-    config = buildDict(config, json.load(open(sys.argv[2])))        
+    config = buildDict(config, json.load(open(sys.argv[2])))
 
 def strToBool(str):
     if str.lower() == "false":
@@ -75,7 +75,7 @@ class Tiles:
         displayH(1)
         displayV(1)
         print()
-    
+
     def checkRectangular(self):
         for i in range(self.n - 1):
             if self.mid[i] != self.mid[i+1]:
@@ -133,8 +133,10 @@ class Tiles:
             return True
         if (config["selectiveCounting"]["asymmetric"] and self.isAsymmetric()):
             return True
+        if (config["selectiveCounting"]["completelySymmetric"] and self.isHSymmetric() and self.isVSymmetric()):
+            return True
         return False
-    
+
     def hashHelp(self):
         temp = convertFromBit(self.top) * convertFromBit(self.mid) * convertFromBit(self.bottom)
         return temp % 2**(3*n)

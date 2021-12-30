@@ -5,6 +5,7 @@
     "leftRightSymmetric": true,
     "topBottomSymmetric": true,
     "rotationallySymmetric": true,
+    "completelySymmetric": true,
     "asymmetric": true
   }
 }
