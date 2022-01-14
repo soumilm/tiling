@@ -1,12 +1,12 @@
 # Tiling
 
-The problem my friend suggested to me was the following: 
+The problem my friend suggested to me was the following:
 Suppose you have a rectangle of dimensions (m x n), where m and n are both integers. How many ways are there to break this rectangle into smaller "tiles", all of which are rectangles of the integer dimensions?
 Note that for the purpose of this problem, we do not count two tilings to be distinct if we can obtain one from the other through a series of reflections and rotations.
 
 ## Usage
 ### 1xn Files
-The 1xn files are used to calculate the number of tilings for a (1 x n) rectangle. 
+The 1xn files are used to calculate the number of tilings for a (1 x n) rectangle.
 
 #### 1xn.py
 1xn.py prints out the total number of tilings for rectangles of length (1 x i), where i takes on all values from 1 to n (inclusive).
@@ -47,10 +47,11 @@ There are a few attributes you can set. Your configuration file need not define 
 * `display` (type: `bool`; default: `false`): Setting this value to `true` will print out all possible configurations. Note that this substantially slows down the code.
 * `rotate` (type: `bool`; default: `true`): This value determins whether to count vavrious rotations/reflections of a tiling as distinct. In particular, setting it to `true` will count them as the same configuration, whereas setting it to `false` will count each rotation as distinct.
 * `selectiveCounting` (type: `object`; default: see sub-bullets): This object allows you to count just a subset of all possible tiling configurations, based on the degrees of symmetry.
-  * `leftRightSymmetric` (type: `bool`; default: `true`): Setting this to `true` will include all configurations that are symmetric upon reflecting along the central vertical axis (aka y-axis). Setting this to `false` will exclude all such configurations.
-  * `topBottomSymmetric` (type: `bool`; default: `true`): Setting this to `true` will include all configurations that are symmetric upon reflecting along the central horizontal axis (aka x-axis). Setting this to `false` will exclude all such configurations.
+  * `verticallySymmetric` (type: `bool`; default: `true`): Setting this to `true` will include all configurations that are symmetric upon reflecting along the central vertical axis (aka y-axis). Setting this to `false` will exclude all such configurations.
+  * `horizontallySymmetric` (type: `bool`; default: `true`): Setting this to `true` will include all configurations that are symmetric upon reflecting along the central horizontal axis (aka x-axis). Setting this to `false` will exclude all such configurations.
   * `rotationallySymmetric` (type: `bool`; default: `true`): Setting this to `true` will include all configurations that are symmetric upon a 180-degree rotation. Setting this to `false` will exclude all such configurations.
+  * `perfectlySymmetric` (type: `bool`; default: `true`): Setting this to `true` will include all configurations that are symmetric in all three ways described above. Setting this to `false` will exclude all configurations (_unless_ one of the above is set to true).
   * `asymmetric` (type: `bool`; default: `true`): Setting this to `true` will include all configurations that are not symmetric by any of the above three definitions. Setting this to `false` will exclude all such configurations.
 
 #### 2xnFormulae.py
-This file is to be used exactly like to `1xn.py` (either via command line arguments, or by being prompted), and inputting any n will output the number of possible tiling configurations for a (2 x n) grid. This is currently counts the total number of tilings, counting reflections and rotations of the same tiling as distinct. As we flesh out the mathematical approach to it, we will be able to make these formulae account for rotations and reflections, and hopefully answer some subproblems (for example: the number of symmetric tilings of a (2 x n) board).
+This file is to be used exactly like to `1xn.py` (either via command line arguments, or by being prompted), and inputting any n will output the number of possible tiling configurations for a (2 x n) grid, both when counting reflections/rotations of a tiling as distinct from it, and when counting them as identical.

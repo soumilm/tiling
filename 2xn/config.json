@@ -2,10 +2,10 @@
   "display": false,
   "rotate": true,
   "selectiveCounting": {
-    "leftRightSymmetric": false,
-    "topBottomSymmetric": false,
-    "rotationallySymmetric": false,
+    "verticallySymmetric": true,
+    "horizontallySymmetric": true,
+    "rotationallySymmetric": true,
     "completelySymmetric": true,
-    "asymmetric": false
+    "asymmetric": true
   }
 }

@@ -125,9 +125,9 @@ class Tiles:
         return not self.isSymmetric()
 
     def isValid(self):
-        if (config["selectiveCounting"]["leftRightSymmetric"] and self.isHSymmetric()):
+        if (config["selectiveCounting"]["verticallySymmetric"] and self.isHSymmetric()):
             return True
-        if (config["selectiveCounting"]["topBottomSymmetric"] and self.isVSymmetric()):
+        if (config["selectiveCounting"]["horizontallySymmetric"] and self.isVSymmetric()):
             return True
         if (config["selectiveCounting"]["rotationallySymmetric"] and self.isRSymmetric()):
             return True
