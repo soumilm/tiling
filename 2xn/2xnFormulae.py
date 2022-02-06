@@ -13,13 +13,8 @@ def tilings(n):
         counts.append(val)
     return counts[n]
 
-n = 0
-if (len(sys.argv) > 1):
-    n = int(sys.argv[1])
-else:
-    n = int(input("n = "))
-
-tilings(n)
+def getCounts(n):
+  return counts[n]
 
 def horizontallySymmetric(i):
     if i == 0: return 1
@@ -54,6 +49,7 @@ def asymmetric(i):
         + (2 * perfectlySymmetric(i))
     )
 def equivalenceClasses(i):
+    tilings(i)
     return (
         (asymmetric(i) // 4)
         + perfectlySymmetric(i)
@@ -65,5 +61,3 @@ def equivalenceClasses(i):
         )//2
     )
 
-print("Total (counting transformations as distinct) : " + str(counts[n]))
-print("Total (counting transformations as identical): " + str(equivalenceClasses(n)))
