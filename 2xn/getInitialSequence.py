@@ -9,7 +9,7 @@ else:
 
 util.tilings(n)
 
-output = "\n".join([str(util.equivalenceClasses(i)) for i in range(1, n+1)])
+output = "\n".join([str(i) + " " + str(util.equivalenceClasses(i)) for i in range(1, n+1)])
 
 f = open("numbers.txt", "w")
 f.write(output)

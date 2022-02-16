@@ -51,13 +51,10 @@ def asymmetric(i):
 def equivalenceClasses(i):
     tilings(i)
     return (
-        (asymmetric(i) // 4)
-        + perfectlySymmetric(i)
-        + (
-            verticallySymmetric(i)
-            + horizontallySymmetric(i)
-            + rotationallySymmetric(i)
-            - 3 * perfectlySymmetric(i)
-        )//2
-    )
-
+        (
+          counts[i]
+          + verticallySymmetric(i)
+          + horizontallySymmetric(i)
+          + rotationallySymmetric(i)
+        )//4
+        )
